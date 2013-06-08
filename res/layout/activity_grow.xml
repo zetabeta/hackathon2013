@@ -3,7 +3,7 @@
     android:id="@+id/mainscreen"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#FF000000"
+    android:background="#FFFFFFFF"
     android:gravity="center"
     android:orientation="vertical" >
 
@@ -36,16 +36,18 @@
             android:text="@string/button_music" />
     </LinearLayout>
 
-    <ImageView
+    <!--  <ImageView
         android:id="@+id/growgraphic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@anim/grow" />
-    
-     <ImageView
-        android:id="@+id/growgraphic2"
+        android:src="@anim/grow" />-->
+        
+      <ImageView
+        android:id="@+id/grow1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@anim/grow2" />
+        android:src="@drawable/grow_1" />
+    
+
 
 </LinearLayout>

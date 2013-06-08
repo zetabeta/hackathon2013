@@ -19,14 +19,24 @@ public class MainActivity extends Activity {
         View mainScreen = findViewById(R.id.mainscreen);
         mainScreen.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                ImageView scene = (ImageView) findViewById(R.id.growgraphic);
-                Drawable d1 = getResources().getDrawable(R.drawable.mainbonsai);
-                Drawable d2 = getResources().getDrawable(R.drawable.mainbonsai1);
-                Drawable d3 = getResources().getDrawable(R.drawable.mainbonsai2);
-                CyclicTransitionDrawable ctd = new CyclicTransitionDrawable(new Drawable[] { d1,
-                        d2, d3 });
+                ImageView scene = (ImageView) findViewById(R.id.grow1);
+                // Drawable d1 = getResources().getDrawable(R.drawable.grow_1);
+                Drawable d2 = getResources().getDrawable(R.drawable.grow_2);
+                Drawable d3 = getResources().getDrawable(R.drawable.grow_3);
+                Drawable d4 = getResources().getDrawable(R.drawable.grow_4);
+                Drawable d5 = getResources().getDrawable(R.drawable.grow_5);
+                Drawable d6 = getResources().getDrawable(R.drawable.grow_6);
+                Drawable d7 = getResources().getDrawable(R.drawable.grow_7);
+                Drawable d8 = getResources().getDrawable(R.drawable.grow_8);
+                Drawable d9 = getResources().getDrawable(R.drawable.grow_9);
+                Drawable d10 = getResources().getDrawable(R.drawable.grow_10);
+                Drawable d11 = getResources().getDrawable(R.drawable.grow_11);
+                Drawable d12 = getResources().getDrawable(R.drawable.grow_12);
+                Drawable d13 = getResources().getDrawable(R.drawable.grow_13);
+                CyclicTransitionDrawable ctd = new CyclicTransitionDrawable(new Drawable[] { d2,
+                        d3, d4, d5, d6, d7, d8, d9, d10, d11, d12, d13 });
                 scene.setImageDrawable(ctd);
-                ctd.startTransition(3000, 3000);
+                ctd.startTransition(1000, 1);
             }
         });
 

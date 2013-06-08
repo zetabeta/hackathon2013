@@ -6,6 +6,7 @@ import android.graphics.drawable.LayerDrawable;
 import android.os.SystemClock;
 
 public class CyclicTransitionDrawable extends LayerDrawable implements Drawable.Callback {
+
     protected enum TransitionState {
         STARTING, PAUSED, RUNNING
     }
@@ -47,7 +48,6 @@ public class CyclicTransitionDrawable extends LayerDrawable implements Drawable.
             done = false;
             transitionStatus = TransitionState.RUNNING;
             break;
-
         case PAUSED:
             if ((SystemClock.uptimeMillis() - startTimeMillis) < pauseDuration)
                 break;
@@ -56,7 +56,6 @@ public class CyclicTransitionDrawable extends LayerDrawable implements Drawable.
                 startTimeMillis = SystemClock.uptimeMillis();
                 transitionStatus = TransitionState.RUNNING;
             }
-
         case RUNNING:
             break;
         }
@@ -73,8 +72,9 @@ public class CyclicTransitionDrawable extends LayerDrawable implements Drawable.
             // Cross fade the current
             int nextDrawableIndex = 0;
 
-            if (currentDrawableIndex + 1 < drawables.length)
+            if (currentDrawableIndex + 1 < drawables.length) {
                 nextDrawableIndex = currentDrawableIndex + 1;
+            }
 
             Drawable currentDrawable = getDrawable(currentDrawableIndex);
             Drawable nextDrawable = getDrawable(nextDrawableIndex);
@@ -97,9 +97,12 @@ public class CyclicTransitionDrawable extends LayerDrawable implements Drawable.
 
                 transitionStatus = TransitionState.PAUSED;
             }
-        } else
+        } else {
             getDrawable(currentDrawableIndex).draw(canvas);
+        }
 
-        invalidateSelf();
+        if (currentDrawableIndex != drawables.length - 1) {
+            invalidateSelf();
+        }
     }
 }
