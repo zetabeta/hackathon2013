@@ -30,6 +30,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="MainActivity" />
         </activity>
+        <activity
+            android:name="ch.checkbit.MoveActivity"
+            android:label="@string/title_activity_move" >
+        </activity>
     </application>
 
 </manifest>

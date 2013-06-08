@@ -7,5 +7,9 @@
     <string name="edit_message">Enter a message</string>
     <string name="button_send">Send</string>
     <string name="title_activity_display_message">DisplayMessageActivity</string>
+    <string name="title_activity_move">MoveActivity</string>
+    <string name="button_water">Water</string>
+    <string name="button_cut">Cut</string>
+    <string name="button_music">Music</string>
 
 </resources>
