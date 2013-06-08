@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainscreen"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#FF000000"
+    android:gravity="center"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/water"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight=".33"
+            android:text="@string/button_water" />
+
+        <Button
+            android:id="@+id/cut"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight=".33"
+            android:text="@string/button_cut" />
+
+        <Button
+            android:id="@+id/music"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight=".33"
+            android:onClick="play"
+            android:text="@string/button_music" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/growgraphic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@anim/grow" />
+    
+     <ImageView
+        android:id="@+id/growgraphic2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@anim/grow2" />
+
+</LinearLayout>

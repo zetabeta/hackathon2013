@@ -11,5 +11,7 @@
     <string name="button_water">Water</string>
     <string name="button_cut">Cut</string>
     <string name="button_music">Music</string>
+    <string name="title_activity_music">MusicActivity</string>
+    <string name="title_activity_cut">CutActivity</string>
 
 </resources>

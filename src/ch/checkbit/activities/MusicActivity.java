@@ -1,6 +1,5 @@
-package ch.checkbit;
+package ch.checkbit.activities;
 
-import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.media.AudioFormat;
@@ -11,23 +10,59 @@ import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+import ch.checkbit.R;
 
-public class DisplayMessageActivity extends Activity {
+public class MusicActivity extends Activity {
 
-	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_display_message);
+		setContentView(R.layout.activity_music);
+		// final MediaPlayer mp1 = MediaPlayer.create(getBaseContext(),
+		// R.raw.mpthreetest);
+		// mp1.start();
+		playTone();
+		setupActionBar();
+	}
 
-		// Make sure we're running on Honeycomb or higher to use ActionBar APIs
+	/**
+	 * Set up the {@link android.app.ActionBar}, if the API is available.
+	 */
+	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+	private void setupActionBar() {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-			// Show the Up button in the action bar.
 			getActionBar().setDisplayHomeAsUpEnabled(true);
 		}
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.music, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			// This ID represents the Home or Up button. In the case of this
+			// activity, the Up button is shown. Use NavUtils to allow users
+			// to navigate up one level in the application structure. For
+			// more details, see the Navigation pattern on Android Design:
+			//
+			// http://developer.android.com/design/patterns/navigation.html#up-vs-back
+			//
+			NavUtils.navigateUpFromSameTask(this);
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+
+	private void playTone() {
 
 		double duration = 1; // seconds
-		double freqOfTone = 1000; // hz
+		double freqOfTone = 5000; // hz
 		int sampleRate = 8000; // a number
 
 		double dnumSamples = duration * sampleRate;
@@ -59,7 +94,7 @@ public class DisplayMessageActivity extends Activity {
 			generatedSnd[idx++] = (byte) ((val & 0xff00) >>> 8);
 		}
 
-		for (i = i; i < numSamples - ramp; ++i) { // Max amplitude for most of
+		for (i = 0; i < numSamples - ramp; ++i) { // Max amplitude for most of
 													// the samples
 			double dVal = sample[i];
 			// scale to maximum amplitude
@@ -69,14 +104,14 @@ public class DisplayMessageActivity extends Activity {
 			generatedSnd[idx++] = (byte) ((val & 0xff00) >>> 8);
 		}
 
-		for (i = i; i < numSamples; ++i) { // Ramp amplitude down
-			double dVal = sample[i];
-			// Ramp down to zero
-			final short val = (short) ((dVal * 32767 * (numSamples - i) / ramp));
-			// in 16 bit wav PCM, first byte is the low order byte
-			generatedSnd[idx++] = (byte) (val & 0x00ff);
-			generatedSnd[idx++] = (byte) ((val & 0xff00) >>> 8);
-		}
+		// for (i = 0; i < numSamples; ++i) { // Ramp amplitude down
+		// double dVal = sample[i];
+		// // Ramp down to zero
+		// final short val = (short) ((dVal * 32767 * (numSamples - i) / ramp));
+		// // in 16 bit wav PCM, first byte is the low order byte
+		// generatedSnd[idx++] = (byte) (val & 0x00ff);
+		// generatedSnd[idx++] = (byte) ((val & 0xff00) >>> 8);
+		// }
 
 		AudioTrack audioTrack = null; // Get audio track
 		try {
@@ -101,40 +136,6 @@ public class DisplayMessageActivity extends Activity {
 
 		if (audioTrack != null)
 			audioTrack.release();
-	}
-
-	/**
-	 * Set up the {@link android.app.ActionBar}, if the API is available.
-	 */
-	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
-	private void setupActionBar() {
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-			getActionBar().setDisplayHomeAsUpEnabled(true);
-		}
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.display_message, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case android.R.id.home:
-			// This ID represents the Home or Up button. In the case of this
-			// activity, the Up button is shown. Use NavUtils to allow users
-			// to navigate up one level in the application structure. For
-			// more details, see the Navigation pattern on Android Design:
-			//
-			// http://developer.android.com/design/patterns/navigation.html#up-vs-back
-			//
-			NavUtils.navigateUpFromSameTask(this);
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
 	}
 
 }

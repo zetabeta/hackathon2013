@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="ch.checkbit.MainActivity"
+            android:name="ch.checkbit.activities.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="ch.checkbit.DisplayMessageActivity"
+            android:name="ch.checkbit.activities.DisplayMessageActivity"
             android:label="@string/title_activity_display_message"
             android:parentActivityName="MainActivity" >
             <meta-data
@@ -31,8 +31,31 @@
                 android:value="MainActivity" />
         </activity>
         <activity
-            android:name="ch.checkbit.MoveActivity"
+            android:name="ch.checkbit.activities.MoveActivity"
             android:label="@string/title_activity_move" >
+        </activity>
+        <activity
+            android:name="ch.checkbit.activities.MusicActivity"
+            android:label="@string/title_activity_music"
+            android:parentActivityName="MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ch.checkbit.MainActivity" />
+        </activity>
+
+        <receiver android:name="ch.checkbit.RemoteControlReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.MEDIA_BUTTON" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name="ch.checkbit.CutActivity"
+            android:label="@string/title_activity_cut"
+            android:parentActivityName="ch.checkbit.activities.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ch.checkbit.activities.MainActivity" />
         </activity>
     </application>
 
