@@ -2,7 +2,6 @@ package ch.checkbit.activities;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
@@ -16,11 +15,11 @@ import ch.checkbit.R;
 
 public class MainActivity extends Activity {
 
-    private SharedPreferences sharedPref;
     private long startTime = System.currentTimeMillis();
     private boolean started = false;
     private CyclicTransitionDrawable ctdGrow;
     private CyclicTransitionDrawable ctdThursty;
+    private CyclicTransitionDrawable ctdHairy;
     private ImageView scene;
 
     @Override
@@ -60,12 +59,21 @@ public class MainActivity extends Activity {
                     long timePassed = System.currentTimeMillis() - startTime;
                     Log.i("timePassed ", "" + timePassed);
                     if (timePassed > 1000 * 30) {
-                        ctdGrow.invalidateSelf();
-                        Drawable thursty = getResources().getDrawable(R.drawable.thursty);
-                        ctdThursty = new CyclicTransitionDrawable(new Drawable[] { d13, thursty });
-                        scene.setImageDrawable(ctdThursty);
-                        ctdThursty.startTransition(3000, 1);
-                        startTime = System.currentTimeMillis();
+                        if (timePassed % 2 == 0) {
+                            ctdGrow.invalidateSelf();
+                            Drawable thursty = getResources().getDrawable(R.drawable.thursty);
+                            ctdThursty = new CyclicTransitionDrawable(new Drawable[] { d13, thursty });
+                            scene.setImageDrawable(ctdThursty);
+                            ctdThursty.startTransition(3000, 1);
+                            startTime = System.currentTimeMillis();
+                        } else {
+                            ctdGrow.invalidateSelf();
+                            Drawable hairy = getResources().getDrawable(R.drawable.hairy);
+                            ctdHairy = new CyclicTransitionDrawable(new Drawable[] { d13, hairy });
+                            scene.setImageDrawable(ctdHairy);
+                            ctdHairy.startTransition(3000, 1);
+                            startTime = System.currentTimeMillis();
+                        }
                     }
                 }
             }
@@ -83,37 +91,46 @@ public class MainActivity extends Activity {
     /** Called when the user clicks the Send button */
     public void play(View view) {
         Intent intent = new Intent(this, MusicActivity.class);
-        // EditText editText = (EditText) findViewById(R.id.edit_message);
-        // String message = editText.getText().toString();
-        // intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
     }
 
     public void cut(View view) {
-
+        Log.i("cut", "cutting...");
+        invalidatePrevious();
+        Drawable thursty = getResources().getDrawable(R.drawable.hairy);
+        Drawable d13 = getResources().getDrawable(R.drawable.grow_13);
+        ctdGrow = new CyclicTransitionDrawable(new Drawable[] { thursty, d13 });
+        scene.setImageDrawable(ctdGrow);
+        ctdGrow.startTransition(1000, 1);
     }
 
     public void water(View view) {
         Log.i("water", "watering...");
-        ctdThursty.invalidateSelf();
+        invalidatePrevious();
         Drawable thursty = getResources().getDrawable(R.drawable.thursty);
         Drawable d13 = getResources().getDrawable(R.drawable.grow_13);
-        CyclicTransitionDrawable ctd1 = new CyclicTransitionDrawable(new Drawable[] { thursty, d13 });
-        scene.setImageDrawable(ctd1);
-        ctd1.startTransition(3000, 1);
-        // ImageView scene = (ImageView)
-        // findViewById(R.id.notthurstyanymoreanime);
-        // TransitionDrawable sceneDrawable = (TransitionDrawable)
-        // scene.getDrawable();
-        // sceneDrawable.startTransition(3000);
+        ctdGrow = new CyclicTransitionDrawable(new Drawable[] { thursty, d13 });
+        scene.setImageDrawable(ctdGrow);
+        ctdGrow.startTransition(3000, 1);
+    }
+
+    private void invalidatePrevious() {
+        try {
+            ctdThursty.invalidateSelf();
+        } catch (Exception e) {
+
+        }
+
+        try {
+            ctdHairy.invalidateSelf();
+        } catch (Exception e) {
+
+        }
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        // sharedPref.edit().remove("STARTED1");
-        // sharedPref.edit().clear();
-        // sharedPref.edit().commit();
     }
 
     @Override

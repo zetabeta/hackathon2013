@@ -28,6 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight=".33"
+            android:onClick="cut"
             android:text="@string/button_cut" />
 
         <Button
