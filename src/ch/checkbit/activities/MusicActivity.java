@@ -2,6 +2,8 @@ package ch.checkbit.activities;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.graphics.drawable.TransitionDrawable;
 import android.media.AudioFormat;
 import android.media.AudioManager;
@@ -12,23 +14,49 @@ import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import ch.checkbit.R;
 
 public class MusicActivity extends Activity {
 
+    private MediaPlayer melody;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        melody = MediaPlayer.create(getBaseContext(), R.raw.bluemood);
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         setContentView(R.layout.activity_music);
-        final MediaPlayer melody = MediaPlayer.create(getBaseContext(), R.raw.bluemood);
         melody.start();
         ImageView scene = (ImageView) findViewById(R.id.blossomanime);
         TransitionDrawable sceneDrawable = (TransitionDrawable) scene.getDrawable();
         sceneDrawable.startTransition(15000);
-        // playTone();
+
+        View mainScreen = findViewById(R.id.musicscreen);
+        mainScreen.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if (melody.isPlaying()) {
+                    melody.pause();
+                } else {
+                    melody.start();
+                }
+            }
+        });
         setupActionBar();
+    }
+
+    public void play(View view) {
+
+    }
+
+    public void cut(View view) {
+
+    }
+
+    public void water(View view) {
+
     }
 
     /**
@@ -39,6 +67,12 @@ public class MusicActivity extends Activity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             getActionBar().setDisplayHomeAsUpEnabled(true);
         }
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
 
     @Override
@@ -63,6 +97,12 @@ public class MusicActivity extends Activity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        melody.stop();
     }
 
     private void playTone() {

@@ -12,6 +12,8 @@ public final class R {
         public static final int blossom=0x7f040000;
         public static final int fadein=0x7f040001;
         public static final int fadeout=0x7f040002;
+        public static final int notthursty=0x7f040003;
+        public static final int thursty=0x7f040004;
     }
     public static final class attr {
     }
@@ -42,15 +44,20 @@ public final class R {
         public static final int grow_9=0x7f02000d;
         public static final int ic_launcher=0x7f02000e;
         public static final int ic_launcher_old=0x7f02000f;
+        public static final int thursty=0x7f020010;
     }
     public static final class id {
-        public static final int action_settings=0x7f0a0007;
-        public static final int blossomanime=0x7f0a0006;
+        public static final int action_settings=0x7f0a000b;
+        public static final int blossomanime=0x7f0a000a;
         public static final int cut=0x7f0a0002;
-        public static final int edit_message=0x7f0a0005;
+        public static final int edit_message=0x7f0a0007;
         public static final int grow1=0x7f0a0004;
         public static final int mainscreen=0x7f0a0000;
+        public static final int movescreen=0x7f0a0008;
         public static final int music=0x7f0a0003;
+        public static final int musicscreen=0x7f0a0009;
+        public static final int notthurstyanymoreanime=0x7f0a0006;
+        public static final int thurstyanime=0x7f0a0005;
         public static final int water=0x7f0a0001;
     }
     public static final class layout {
@@ -69,7 +76,6 @@ public final class R {
     }
     public static final class raw {
         public static final int bluemood=0x7f050000;
-        public static final int mpthreetest=0x7f050001;
     }
     public static final class string {
         public static final int action_settings=0x7f070001;
