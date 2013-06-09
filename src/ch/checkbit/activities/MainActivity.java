@@ -21,6 +21,8 @@ public class MainActivity extends Activity {
     private CyclicTransitionDrawable ctdThursty;
     private CyclicTransitionDrawable ctdHairy;
     private ImageView scene;
+    private boolean cut = false;
+    private boolean water = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -66,6 +68,7 @@ public class MainActivity extends Activity {
                             scene.setImageDrawable(ctdThursty);
                             ctdThursty.startTransition(3000, 1);
                             startTime = System.currentTimeMillis();
+                            water = true;
                         } else {
                             ctdGrow.invalidateSelf();
                             Drawable hairy = getResources().getDrawable(R.drawable.hairy);
@@ -73,6 +76,7 @@ public class MainActivity extends Activity {
                             scene.setImageDrawable(ctdHairy);
                             ctdHairy.startTransition(3000, 1);
                             startTime = System.currentTimeMillis();
+                            cut = true;
                         }
                     }
                 }
@@ -88,30 +92,37 @@ public class MainActivity extends Activity {
         return true;
     }
 
-    /** Called when the user clicks the Send button */
     public void play(View view) {
-        Intent intent = new Intent(this, MusicActivity.class);
-        startActivity(intent);
+        if (cut == false && water == false) {
+            Intent intent = new Intent(this, MusicActivity.class);
+            startActivity(intent);
+        }
     }
 
     public void cut(View view) {
-        Log.i("cut", "cutting...");
-        invalidatePrevious();
-        Drawable thursty = getResources().getDrawable(R.drawable.hairy);
-        Drawable d13 = getResources().getDrawable(R.drawable.grow_13);
-        ctdGrow = new CyclicTransitionDrawable(new Drawable[] { thursty, d13 });
-        scene.setImageDrawable(ctdGrow);
-        ctdGrow.startTransition(1000, 1);
+        if (cut == true) {
+            Log.i("cut", "cutting...");
+            invalidatePrevious();
+            Drawable thursty = getResources().getDrawable(R.drawable.hairy);
+            Drawable d13 = getResources().getDrawable(R.drawable.grow_13);
+            ctdGrow = new CyclicTransitionDrawable(new Drawable[] { thursty, d13 });
+            scene.setImageDrawable(ctdGrow);
+            ctdGrow.startTransition(1000, 1);
+            cut = false;
+        }
     }
 
     public void water(View view) {
-        Log.i("water", "watering...");
-        invalidatePrevious();
-        Drawable thursty = getResources().getDrawable(R.drawable.thursty);
-        Drawable d13 = getResources().getDrawable(R.drawable.grow_13);
-        ctdGrow = new CyclicTransitionDrawable(new Drawable[] { thursty, d13 });
-        scene.setImageDrawable(ctdGrow);
-        ctdGrow.startTransition(3000, 1);
+        if (water == true) {
+            Log.i("water", "watering...");
+            invalidatePrevious();
+            Drawable thursty = getResources().getDrawable(R.drawable.thursty);
+            Drawable d13 = getResources().getDrawable(R.drawable.grow_13);
+            ctdGrow = new CyclicTransitionDrawable(new Drawable[] { thursty, d13 });
+            scene.setImageDrawable(ctdGrow);
+            ctdGrow.startTransition(3000, 1);
+            water = false;
+        }
     }
 
     private void invalidatePrevious() {
