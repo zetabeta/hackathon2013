@@ -58,7 +58,7 @@ public class MainActivity extends Activity {
                     Log.i("mainActivity started ", "" + started);
                     long timePassed = System.currentTimeMillis() - startTime;
                     Log.i("timePassed ", "" + timePassed);
-                    if (timePassed > 1000 * 30) {
+                    if (timePassed > 1000 * 10) {
                         if (timePassed % 2 == 0) {
                             ctdGrow.invalidateSelf();
                             Drawable thursty = getResources().getDrawable(R.drawable.thursty);
