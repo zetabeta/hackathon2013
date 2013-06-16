@@ -41,14 +41,12 @@ public class SQLHelper {
 
         if (cursor.moveToFirst()) {
             do {
-                Log.i("tag", "check1");
                 ActionDTO action = new ActionDTO();
                 action.setType(ActionType.valueOf(cursor.getString(1)));
                 action.setTime(cursor.getLong(2));
                 list.add(action);
             } while (cursor.moveToNext());
         }
-        Log.i("tag", "check2");
         return list;
     }
 

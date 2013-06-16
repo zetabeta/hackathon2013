@@ -73,16 +73,10 @@ public final class R {
     public static final class string {
         public static final int action_settings=0x7f070001;
         public static final int app_name=0x7f070000;
-        public static final int button_cut=0x7f070008;
-        public static final int button_music=0x7f070009;
-        public static final int button_send=0x7f070004;
-        public static final int button_water=0x7f070007;
-        public static final int edit_message=0x7f070003;
-        public static final int hello_world=0x7f070002;
-        public static final int title_activity_cut=0x7f07000b;
-        public static final int title_activity_display_message=0x7f070005;
-        public static final int title_activity_move=0x7f070006;
-        public static final int title_activity_music=0x7f07000a;
+        public static final int button_cut=0x7f070003;
+        public static final int button_music=0x7f070004;
+        public static final int button_water=0x7f070002;
+        public static final int title_activity_music=0x7f070005;
     }
     public static final class style {
         /** 
