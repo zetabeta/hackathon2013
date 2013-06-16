@@ -15,9 +15,16 @@ import android.view.View;
 import android.widget.ImageView;
 import ch.checkbit.R;
 
+/**
+ * handles the special music feature
+ * 
+ * @author zeta
+ * 
+ */
 public class MusicActivity extends Activity {
 
     private MediaPlayer melody;
+    private static final int BLOSSON_TRANSITION_DURATION = 15000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +36,7 @@ public class MusicActivity extends Activity {
         melody.start();
         ImageView scene = (ImageView) findViewById(R.id.blossomanime);
         TransitionDrawable sceneDrawable = (TransitionDrawable) scene.getDrawable();
-        sceneDrawable.startTransition(15000);
+        sceneDrawable.startTransition(BLOSSON_TRANSITION_DURATION);
 
         View mainScreen = findViewById(R.id.musicscreen);
         mainScreen.setOnClickListener(new View.OnClickListener() {
@@ -99,10 +106,6 @@ public class MusicActivity extends Activity {
     public void onDestroy() {
         super.onDestroy();
         melody.stop();
-    }
-
-    private void playTone() {
-        // TODO
     }
 
 }

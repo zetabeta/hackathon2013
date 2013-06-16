@@ -4,7 +4,15 @@ import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.SystemClock;
+import android.util.Log;
 
+/**
+ * draws multiple transitions between frames ( by default, android can make
+ * transitions only between 2 frames)
+ * 
+ * @author zeta
+ * 
+ */
 public class MultipleTransitionDrawable extends LayerDrawable implements Drawable.Callback {
 
     protected enum TransitionState {
@@ -28,6 +36,7 @@ public class MultipleTransitionDrawable extends LayerDrawable implements Drawabl
     }
 
     public void startTransition(int durationMillis, int pauseTimeMillis) {
+        Log.i(LogType.ACTIVITY_LOG.name(), "Starting animation transition...");
         fromAlpha = 0;
         toAlpha = 255;
         duration = durationMillis;

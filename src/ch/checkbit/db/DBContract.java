@@ -2,6 +2,12 @@ package ch.checkbit.db;
 
 import android.provider.BaseColumns;
 
+/**
+ * simple contract to encapsulate the database table info
+ * 
+ * @author zeta
+ * 
+ */
 public class DBContract {
 
     private DBContract() {
