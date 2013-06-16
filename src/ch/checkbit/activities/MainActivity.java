@@ -49,17 +49,17 @@ public class MainActivity extends Activity {
                 finalState = getResources().getDrawable(R.drawable.grow_13);
 
                 if (!started) {
-                    started = true;
                     startGrowSequence();
+                    started = true;
                 } else {
                     long timePassed = System.currentTimeMillis() - startTime;
                     if (timePassed > TIME_WATER_MILLISECONDS * 10) {
-                        if (timePassed % 2 == 0) {
+                        if (timePassed % 2 == 0 && !water && !cut) {
                             ctdGrow.invalidateSelf();
                             startThurstySequence();
                             startTime = System.currentTimeMillis();
                             water = true;
-                        } else {
+                        } else if (timePassed % 2 == 1 && !water && !cut) {
                             ctdGrow.invalidateSelf();
                             startHairySequence();
                             startTime = System.currentTimeMillis();
