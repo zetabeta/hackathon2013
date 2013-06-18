@@ -44,6 +44,7 @@ public class MainActivity extends Activity {
 
     private boolean cut = false;
     private boolean water = false;
+    private boolean play = false;
 
     private SQLDataSource dataSource;
 
@@ -66,20 +67,7 @@ public class MainActivity extends Activity {
                     startGrowSequence();
                     dataSource.put(ActionType.START);
                 } else {
-                    long timePassed = System.currentTimeMillis() - startTime;
-                    if (timePassed > TIME_WATER_MILLISECONDS * 10) {
-                        if (timePassed % 2 == 0 && !water && !cut) {
-                            ctdGrow.invalidateSelf();
-                            startThurstySequence();
-                            startTime = System.currentTimeMillis();
-                            water = true;
-                        } else if (timePassed % 2 == 1 && !water && !cut) {
-                            ctdGrow.invalidateSelf();
-                            startHairySequence();
-                            startTime = System.currentTimeMillis();
-                            cut = true;
-                        }
-                    }
+                    // TODO
                 }
             }
         });
@@ -110,6 +98,13 @@ public class MainActivity extends Activity {
             ctdGrow.startTransition(TRANSITION_DURATION_CUT, PAUSE_DURATION);
             cut = false;
         }
+
+        // TODO just for testing purpose
+        else if (cut == false && water == false) {
+            ctdGrow.invalidateSelf();
+            startHairySequence();
+            cut = true;
+        }
     }
 
     public void water(View view) {
@@ -122,6 +117,13 @@ public class MainActivity extends Activity {
             ctdGrow.startTransition(TRANSITION_DURATION_WATER, PAUSE_DURATION);
             water = false;
         }
+        // TODO just for testing purpose
+        else if (cut == false && water == false) {
+            ctdGrow.invalidateSelf();
+            startThurstySequence();
+            water = true;
+        }
+
     }
 
     private void invalidatePrevious() {
