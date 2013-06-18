@@ -1,5 +1,7 @@
 package ch.checkbit.activities;
 
+import java.util.Date;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -30,12 +32,11 @@ public class MainActivity extends Activity {
     private static final int TRANSITION_DURATION_THURSTY = 3000;
     private static final int TRANSITION_DURATION_HAIRY = 3000;
     private static final long TIME_WATER_MILLISECONDS = 1000;
-    private static final long TIME_CUT_MILLISECONDS = 2203;
+    private static final long TIME_CUT_MILLISECONDS = 16203;
     private static final int PAUSE_DURATION = 1;
 
     private static final boolean TEST_ENVIRONMENT = true;
 
-    private long startTime = System.currentTimeMillis();
     private MultipleTransitionDrawable ctdGrow;
     private MultipleTransitionDrawable ctdThursty;
     private MultipleTransitionDrawable ctdHairy;
@@ -44,7 +45,6 @@ public class MainActivity extends Activity {
 
     private boolean cut = false;
     private boolean water = false;
-    private boolean play = false;
 
     private SQLDataSource dataSource;
 
@@ -57,6 +57,7 @@ public class MainActivity extends Activity {
         initDB();
 
         View mainScreen = findViewById(R.id.mainscreen);
+
         mainScreen.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
@@ -75,6 +76,55 @@ public class MainActivity extends Activity {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        // dataSource.open();
+        checkLastTimeCare();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        // dataSource.close();
+    }
+
+    private void checkLastTimeCare() {
+
+        if (dataSource.getLastUpdateFrom(ActionType.CUT) == null
+                && dataSource.getLastUpdateFrom(ActionType.WATER) != null) {
+            dataSource.put(ActionType.CUT);
+        }
+
+        if (dataSource.getLastUpdateFrom(ActionType.WATER) == null) {
+            dataSource.put(ActionType.WATER);
+        }
+
+        Long lastWateringTimestamp = dataSource.getLastUpdateFrom(ActionType.WATER).getTime();
+        Long lastCuttingTimestamp = Long.MAX_VALUE;
+        if (dataSource.getLastUpdateFrom(ActionType.CUT) != null) {
+            lastCuttingTimestamp = dataSource.getLastUpdateFrom(ActionType.CUT).getTime();
+        }
+
+        Long now = new Date().getTime();
+
+        if (lastWateringTimestamp > lastCuttingTimestamp) {
+            // time to cut!
+            if (now - lastCuttingTimestamp > TIME_CUT_MILLISECONDS) {
+                startHairySequence();
+                cut = true;
+            }
+        } else {
+            // time to water!
+            if (now - lastWateringTimestamp > TIME_WATER_MILLISECONDS) {
+                startThurstySequence();
+                water = true;
+            }
+
+        }
+
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
@@ -83,6 +133,7 @@ public class MainActivity extends Activity {
     public void play(View view) {
         Log.i(LogType.ACTION.name(), "Bonsai is happy to hear some music! :)");
         if (cut == false && water == false) {
+            dataSource.put(ActionType.MUSIC);
             Intent intent = new Intent(this, MusicActivity.class);
             startActivity(intent);
         }
@@ -97,13 +148,7 @@ public class MainActivity extends Activity {
             scene.setImageDrawable(ctdGrow);
             ctdGrow.startTransition(TRANSITION_DURATION_CUT, PAUSE_DURATION);
             cut = false;
-        }
-
-        // TODO just for testing purpose
-        else if (cut == false && water == false) {
-            ctdGrow.invalidateSelf();
-            startHairySequence();
-            cut = true;
+            dataSource.put(ActionType.CUT);
         }
     }
 
@@ -116,14 +161,8 @@ public class MainActivity extends Activity {
             scene.setImageDrawable(ctdGrow);
             ctdGrow.startTransition(TRANSITION_DURATION_WATER, PAUSE_DURATION);
             water = false;
+            dataSource.put(ActionType.WATER);
         }
-        // TODO just for testing purpose
-        else if (cut == false && water == false) {
-            ctdGrow.invalidateSelf();
-            startThurstySequence();
-            water = true;
-        }
-
     }
 
     private void invalidatePrevious() {
