@@ -58,6 +58,12 @@ public class MainActivity extends Activity {
 
         View mainScreen = findViewById(R.id.mainscreen);
         finalState = getResources().getDrawable(R.drawable.grow_13);
+        scene = (ImageView) findViewById(R.id.grow1);
+        if (dataSource.getLastUpdateFrom(ActionType.START) != null) {
+            scene.setImageDrawable(finalState);
+        }
+
+        checkLastTimeCare();
 
         mainScreen.setOnClickListener(new View.OnClickListener() {
 
@@ -88,44 +94,26 @@ public class MainActivity extends Activity {
         // dataSource.close();
     }
 
-    private void checkLastTimeCare() {
-
-        if (dataSource.getLastUpdateFrom(ActionType.CUT) == null
-                && dataSource.getLastUpdateFrom(ActionType.WATER) != null) {
-            dataSource.put(ActionType.CUT);
-        }
-
-        if (dataSource.getLastUpdateFrom(ActionType.WATER) == null) {
-            dataSource.put(ActionType.WATER);
-        }
-
-        Long lastWateringTimestamp = dataSource.getLastUpdateFrom(ActionType.WATER).getTime();
-        Long lastCuttingTimestamp = Long.MAX_VALUE;
-        if (dataSource.getLastUpdateFrom(ActionType.CUT) != null) {
-            lastCuttingTimestamp = dataSource.getLastUpdateFrom(ActionType.CUT).getTime();
-        }
-
-        Long now = new Date().getTime();
-
-        if (lastWateringTimestamp > lastCuttingTimestamp) {
-            // time to cut!
-            if (now - lastCuttingTimestamp > TIME_CUT_MILLISECONDS) {
-                startHairySequence();
-                cut = true;
-            }
-        } else {
-            // time to water!
-            if (now - lastWateringTimestamp > TIME_WATER_MILLISECONDS) {
-                startThurstySequence();
-                water = true;
-            }
-        }
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
+    }
+
+    @Override
+    public void onDestroy() {
+        Log.i(LogType.ACTIVITY_LOG.name(), "Destroying main activity.");
+        super.onDestroy();
+        if (TEST_ENVIRONMENT) {
+            dataSource.dropTable();
+        }
+        dataSource.close();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
 
     public void play(View view) {
@@ -222,20 +210,38 @@ public class MainActivity extends Activity {
         }
     }
 
-    @Override
-    public void onDestroy() {
-        Log.i(LogType.ACTIVITY_LOG.name(), "Destroying main activity.");
-        super.onDestroy();
-        if (TEST_ENVIRONMENT) {
-            dataSource.dropTable();
-        }
-        dataSource.close();
-    }
+    private void checkLastTimeCare() {
 
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        if (dataSource.getLastUpdateFrom(ActionType.CUT) == null
+                && dataSource.getLastUpdateFrom(ActionType.WATER) != null) {
+            dataSource.put(ActionType.CUT);
+        }
+
+        if (dataSource.getLastUpdateFrom(ActionType.WATER) == null) {
+            dataSource.put(ActionType.WATER);
+        }
+
+        Long lastWateringTimestamp = dataSource.getLastUpdateFrom(ActionType.WATER).getTime();
+        Long lastCuttingTimestamp = Long.MAX_VALUE;
+        if (dataSource.getLastUpdateFrom(ActionType.CUT) != null) {
+            lastCuttingTimestamp = dataSource.getLastUpdateFrom(ActionType.CUT).getTime();
+        }
+
+        Long now = new Date().getTime();
+
+        if (lastWateringTimestamp > lastCuttingTimestamp) {
+            // time to cut!
+            if (now - lastCuttingTimestamp > TIME_CUT_MILLISECONDS) {
+                startHairySequence();
+                cut = true;
+            }
+        } else {
+            // time to water!
+            if (now - lastWateringTimestamp > TIME_WATER_MILLISECONDS) {
+                startThurstySequence();
+                water = true;
+            }
+        }
     }
 
 }
