@@ -47,18 +47,18 @@ public final class R {
         public static final int hairy=0x7f020010;
         public static final int ic_launcher=0x7f020011;
         public static final int ic_launcher_old=0x7f020012;
-        public static final int thursty=0x7f020013;
-        public static final int topf=0x7f020014;
+        public static final int pot=0x7f020013;
+        public static final int thursty=0x7f020014;
     }
     public static final class id {
         public static final int action_settings=0x7f0a0008;
-        public static final int base=0x7f0a0004;
         public static final int blossomanime=0x7f0a0007;
         public static final int cut=0x7f0a0002;
         public static final int grow1=0x7f0a0005;
         public static final int mainscreen=0x7f0a0000;
         public static final int music=0x7f0a0003;
         public static final int musicscreen=0x7f0a0006;
+        public static final int pot=0x7f0a0004;
         public static final int water=0x7f0a0001;
     }
     public static final class layout {

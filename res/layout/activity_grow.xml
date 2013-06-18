@@ -45,15 +45,17 @@
         android:layout_height="fill_parent" >
 
         <ImageView
-            android:id="@+id/base"
+            android:id="@+id/pot"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/topf" />
+            android:layout_alignParentBottom="true"
+            android:src="@drawable/pot" />
 
         <ImageView
             android:id="@+id/grow1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
             android:src="@drawable/grow_1" />
     </RelativeLayout>
 
