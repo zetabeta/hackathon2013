@@ -12,8 +12,6 @@ public final class R {
         public static final int blossom=0x7f040000;
         public static final int fadein=0x7f040001;
         public static final int fadeout=0x7f040002;
-        public static final int notthursty=0x7f040003;
-        public static final int thursty=0x7f040004;
     }
     public static final class attr {
     }
