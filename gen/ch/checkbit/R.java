@@ -12,6 +12,7 @@ public final class R {
         public static final int blossom=0x7f040000;
         public static final int fadein=0x7f040001;
         public static final int fadeout=0x7f040002;
+        public static final int flyfly=0x7f040003;
     }
     public static final class attr {
     }
@@ -28,33 +29,35 @@ public final class R {
     public static final class drawable {
         public static final int backgroundplain=0x7f020000;
         public static final int blossom1=0x7f020001;
-        public static final int grow_1=0x7f020002;
-        public static final int grow_10=0x7f020003;
-        public static final int grow_11=0x7f020004;
-        public static final int grow_12=0x7f020005;
-        public static final int grow_13=0x7f020006;
-        public static final int grow_2=0x7f020007;
-        public static final int grow_3=0x7f020008;
-        public static final int grow_4=0x7f020009;
-        public static final int grow_5=0x7f02000a;
-        public static final int grow_6=0x7f02000b;
-        public static final int grow_7=0x7f02000c;
-        public static final int grow_8=0x7f02000d;
-        public static final int grow_9=0x7f02000e;
-        public static final int hairy=0x7f02000f;
-        public static final int ic_launcher=0x7f020010;
-        public static final int ic_launcher_old=0x7f020011;
-        public static final int pot=0x7f020012;
-        public static final int thursty=0x7f020013;
+        public static final int flyy=0x7f020002;
+        public static final int grow_1=0x7f020003;
+        public static final int grow_10=0x7f020004;
+        public static final int grow_11=0x7f020005;
+        public static final int grow_12=0x7f020006;
+        public static final int grow_13=0x7f020007;
+        public static final int grow_2=0x7f020008;
+        public static final int grow_3=0x7f020009;
+        public static final int grow_4=0x7f02000a;
+        public static final int grow_5=0x7f02000b;
+        public static final int grow_6=0x7f02000c;
+        public static final int grow_7=0x7f02000d;
+        public static final int grow_8=0x7f02000e;
+        public static final int grow_9=0x7f02000f;
+        public static final int hairy=0x7f020010;
+        public static final int ic_launcher=0x7f020011;
+        public static final int ic_launcher_old=0x7f020012;
+        public static final int pot=0x7f020013;
+        public static final int thursty=0x7f020014;
     }
     public static final class id {
-        public static final int action_settings=0x7f0a0008;
-        public static final int blossomanime=0x7f0a0007;
+        public static final int action_settings=0x7f0a0009;
+        public static final int blossomanime=0x7f0a0008;
         public static final int cut=0x7f0a0002;
+        public static final int fly=0x7f0a0006;
         public static final int grow1=0x7f0a0005;
         public static final int mainscreen=0x7f0a0000;
         public static final int music=0x7f0a0003;
-        public static final int musicscreen=0x7f0a0006;
+        public static final int musicscreen=0x7f0a0007;
         public static final int pot=0x7f0a0004;
         public static final int water=0x7f0a0001;
     }

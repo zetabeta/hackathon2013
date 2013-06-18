@@ -59,6 +59,16 @@
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="25dp"
             android:src="@drawable/grow_1" />
+
+        <ImageView
+            android:id="@+id/fly"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="113dp"
+            android:src="@drawable/flyy"
+            android:visible="false" />
     </RelativeLayout>
 
 </LinearLayout>

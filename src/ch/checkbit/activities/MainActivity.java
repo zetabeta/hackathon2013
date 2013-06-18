@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import ch.checkbit.LogType;
 import ch.checkbit.MultipleTransitionDrawable;
@@ -41,6 +43,7 @@ public class MainActivity extends Activity {
     private MultipleTransitionDrawable ctdThursty;
     private MultipleTransitionDrawable ctdHairy;
     private ImageView scene;
+    private ImageView fly;
     private Drawable finalState;
 
     private boolean cut = false;
@@ -63,6 +66,8 @@ public class MainActivity extends Activity {
             scene.setImageDrawable(finalState);
         }
 
+        fly = (ImageView) findViewById(R.id.fly);
+        fly.setVisibility(4);
         checkLastTimeCare();
 
         mainScreen.setOnClickListener(new View.OnClickListener() {
@@ -74,7 +79,9 @@ public class MainActivity extends Activity {
                     startGrowSequence();
                     dataSource.put(ActionType.START);
                 } else {
-                    // TODO
+                    fly.setVisibility(0);
+                    Animation flyfly = AnimationUtils.loadAnimation(MainActivity.this, R.anim.flyfly);
+                    fly.startAnimation(flyfly);
                 }
             }
         });
