@@ -31,8 +31,8 @@ public class MainActivity extends Activity {
     private static final int TRANSITION_DURATION_CUT = 3000;
     private static final int TRANSITION_DURATION_THURSTY = 3000;
     private static final int TRANSITION_DURATION_HAIRY = 3000;
-    private static final long TIME_WATER_MILLISECONDS = 1000;
-    private static final long TIME_CUT_MILLISECONDS = 16203;
+    private static final long TIME_WATER_MILLISECONDS = 20000;
+    private static final long TIME_CUT_MILLISECONDS = 160203;
     private static final int PAUSE_DURATION = 1;
 
     private static final boolean TEST_ENVIRONMENT = true;
@@ -57,12 +57,12 @@ public class MainActivity extends Activity {
         initDB();
 
         View mainScreen = findViewById(R.id.mainscreen);
+        finalState = getResources().getDrawable(R.drawable.grow_13);
 
         mainScreen.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
                 scene = (ImageView) findViewById(R.id.grow1);
-                finalState = getResources().getDrawable(R.drawable.grow_13);
 
                 if (dataSource.getLastUpdateFrom(ActionType.START) == null) {
                     startGrowSequence();
@@ -119,9 +119,7 @@ public class MainActivity extends Activity {
                 startThurstySequence();
                 water = true;
             }
-
         }
-
     }
 
     @Override
