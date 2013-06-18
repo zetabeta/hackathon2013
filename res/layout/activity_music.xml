@@ -3,7 +3,7 @@
     android:id="@+id/musicscreen"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@drawable/backgroundplain"
     android:gravity="center"
     android:orientation="vertical"
     tools:context=".MusicActivity" >
@@ -37,10 +37,21 @@
             android:text="@string/button_music" />
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/blossomanime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@anim/blossom" />
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <ImageView
+            android:id="@+id/base"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/topf" />
+
+        <ImageView
+            android:id="@+id/blossomanime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@anim/blossom" />
+    </RelativeLayout>
 
 </LinearLayout>
