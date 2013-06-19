@@ -114,14 +114,13 @@ public class MainActivity extends Activity {
     @Override
     public void onResume() {
         super.onResume();
-        // dataSource.open();
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         checkLastTimeCare();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        // dataSource.close();
     }
 
     @Override
@@ -150,6 +149,8 @@ public class MainActivity extends Activity {
         Log.i(LogType.ACTION.name(), "Bonsai is happy to hear some music! :)");
         if (cut == false && water == false) {
             dataSource.put(ActionType.MUSIC);
+            dataSource.put(ActionType.WATER);
+            dataSource.put(ActionType.CUT);
             Intent intent = new Intent(this, MusicActivity.class);
             startActivity(intent);
         }
