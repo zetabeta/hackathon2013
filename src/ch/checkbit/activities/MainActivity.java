@@ -2,6 +2,8 @@ package ch.checkbit.activities;
 
 import java.util.Date;
 
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -11,6 +13,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -44,6 +47,7 @@ public class MainActivity extends Activity {
     private MultipleTransitionDrawable ctdHairy;
     private ImageView scene;
     private ImageView fly;
+    private ImageView ladybug;
     private Drawable finalState;
 
     private boolean cut = false;
@@ -68,6 +72,8 @@ public class MainActivity extends Activity {
 
         fly = (ImageView) findViewById(R.id.fly);
         fly.setVisibility(4);
+        ladybug = (ImageView) findViewById(R.id.ladybug);
+        ladybug.setVisibility(4);
         checkLastTimeCare();
 
         mainScreen.setOnClickListener(new View.OnClickListener() {
@@ -79,9 +85,18 @@ public class MainActivity extends Activity {
                     startGrowSequence();
                     dataSource.put(ActionType.START);
                 } else {
-                    fly.setVisibility(0);
-                    Animation flyfly = AnimationUtils.loadAnimation(MainActivity.this, R.anim.flyfly);
+                    Animation flyfly = AnimationUtils.loadAnimation(MainActivity.this, R.anim.flyfly2);
                     fly.startAnimation(flyfly);
+
+                    // Animation ladybuganime =
+                    // AnimationUtils.loadAnimation(MainActivity.this,
+                    // R.anim.ladybug);
+                    // ladybug.startAnimation(ladybuganime);
+
+                    ValueAnimator animator = ObjectAnimator.ofFloat(ladybug, "x", 0, -200).setDuration(5000);
+                    animator.setInterpolator(new AccelerateInterpolator(2f));
+                    animator.setRepeatMode(ValueAnimator.REVERSE);
+                    animator.start();
                 }
             }
         });
