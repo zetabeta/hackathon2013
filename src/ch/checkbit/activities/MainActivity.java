@@ -1,6 +1,7 @@
 package ch.checkbit.activities;
 
 import java.util.Date;
+import java.util.Random;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
@@ -36,7 +37,7 @@ public class MainActivity extends Activity {
     private static final int TRANSITION_DURATION_THURSTY = 3000;
     private static final int TRANSITION_DURATION_HAIRY = 3000;
     private static final long TIME_WATER_MILLISECONDS = 20000;
-    private static final long TIME_CUT_MILLISECONDS = 160203;
+    private static final long TIME_CUT_MILLISECONDS = 40203;
     private static final int PAUSE_DURATION = 1;
 
     private static final boolean TEST_ENVIRONMENT = true;
@@ -53,6 +54,8 @@ public class MainActivity extends Activity {
     private boolean water = false;
 
     private SQLDataSource dataSource;
+
+    private int[] flyAnimations = new int[] { R.anim.flyfly2, R.anim.flyfly, R.anim.flyfly3 };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -84,17 +87,26 @@ public class MainActivity extends Activity {
                     startGrowSequence();
                     dataSource.put(ActionType.START);
                 } else {
+                    startSomeBugs();
+                }
+            }
 
-                    Animation flyfly = AnimationUtils.loadAnimation(MainActivity.this, R.anim.flyfly2);
-                    fly.startAnimation(flyfly);
+            private void startSomeBugs() {
 
+                int random = new Random().nextInt();
+                if (random % 3 == 0) {
                     ladybug.setVisibility(0);
-                    ObjectAnimator animator = ObjectAnimator.ofFloat(ladybug, "x", 300);
-                    animator.setDuration(1000);
+                    ObjectAnimator animator = ObjectAnimator.ofFloat(ladybug, "x", new Random().nextInt(400));
+                    animator.setDuration(700);
                     animator.setRepeatCount(ValueAnimator.RESTART);
                     animator.setRepeatMode(ValueAnimator.REVERSE);
                     animator.start();
+                } else {
+                    int randomFlyAnim = new Random().nextInt(flyAnimations.length);
+                    Animation flyfly = AnimationUtils.loadAnimation(MainActivity.this, flyAnimations[randomFlyAnim]);
+                    fly.startAnimation(flyfly);
                 }
+
             }
         });
     }

@@ -14,6 +14,7 @@ public final class R {
         public static final int fadeout=0x7f040002;
         public static final int flyfly=0x7f040003;
         public static final int flyfly2=0x7f040004;
+        public static final int flyfly3=0x7f040005;
     }
     public static final class attr {
     }
