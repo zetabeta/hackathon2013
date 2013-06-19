@@ -13,7 +13,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
-import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -85,22 +84,19 @@ public class MainActivity extends Activity {
                     startGrowSequence();
                     dataSource.put(ActionType.START);
                 } else {
+
                     Animation flyfly = AnimationUtils.loadAnimation(MainActivity.this, R.anim.flyfly2);
                     fly.startAnimation(flyfly);
 
-                    // Animation ladybuganime =
-                    // AnimationUtils.loadAnimation(MainActivity.this,
-                    // R.anim.ladybug);
-                    // ladybug.startAnimation(ladybuganime);
-
-                    ValueAnimator animator = ObjectAnimator.ofFloat(ladybug, "x", 0, -200).setDuration(5000);
-                    animator.setInterpolator(new AccelerateInterpolator(2f));
+                    ladybug.setVisibility(0);
+                    ObjectAnimator animator = ObjectAnimator.ofFloat(ladybug, "x", 300);
+                    animator.setDuration(1000);
+                    animator.setRepeatCount(ValueAnimator.RESTART);
                     animator.setRepeatMode(ValueAnimator.REVERSE);
                     animator.start();
                 }
             }
         });
-
     }
 
     @Override
